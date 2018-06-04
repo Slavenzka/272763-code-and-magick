@@ -1,3 +1,5 @@
+'use strict';
+
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -21,7 +23,7 @@ var getMaxElement = function (arrayResults) {
     }
   }
 
-    return maxResultValue;
+  return maxResultValue;
 };
 
 var renderCloud = function (ctx, startX, startY, cloudWidth, cloudHeight, color) {
@@ -35,33 +37,33 @@ var renderCloud = function (ctx, startX, startY, cloudWidth, cloudHeight, color)
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, "rgba(0, 0 , 0, 0.7)");
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, "rgb(255, 255, 255)");
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgba(0, 0 , 0, 0.7)');
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgb(255, 255, 255)');
 
 
-  ctx.font = "16px PT Mono";
-  ctx.baseline = "hanging";
-  ctx.fillStyle = "rgb(0, 0, 0)";
-  ctx.fillText("Ура! Вы победили!", CLOUD_X + CLOUD_WIDTH / 3, HEADING_Y);
-  ctx.fillText("Список результатов:", CLOUD_X + CLOUD_WIDTH / 3, HEADING_Y + HEADING_GAP);
+  ctx.font = '16px PT Mono';
+  ctx.baseline = 'hanging';
+  ctx.fillStyle = 'rgb(0, 0, 0)';
+  ctx.fillText('Ура! Вы победили!', CLOUD_X + CLOUD_WIDTH / 3, HEADING_Y);
+  ctx.fillText('Список результатов:', CLOUD_X + CLOUD_WIDTH / 3, HEADING_Y + HEADING_GAP);
 
-  for (i = 0; i < names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     var columnHeight = Math.round(times[i]) * DIAGRAM_HEIGHT / getMaxElement(times);
 
     ctx.beginPath();
     ctx.rect(CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - DIAGRAM_BOTTOM - columnHeight, COLUMN_WIDTH, columnHeight);
-    var columnColor = "rgba(0, 0, 255, " + (Math.random() + AVOID_TRANSPARENCY).toString() + ")";
+    var columnColor = 'rgba(0, 0, 255, ' + (Math.random() + AVOID_TRANSPARENCY).toString() + ')';
     ctx.fillStyle = columnColor;
     ctx.strokeStyle = columnColor;
-    if (names[i] === "Вы") {
-      ctx.fillStyle = "rgba(255, 0, 0, 1)";
-      ctx.strokeStyle = "rgba(255, 0, 0, 1)";
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
     }
 
     ctx.fillText(names[i], CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - CAPTION_BOTTOM);
-    ctx.font = "10px PT Mono";
+    ctx.font = '10px PT Mono';
     ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_GAP + GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - DIAGRAM_BOTTOM - columnHeight - GAP / 2);
-    ctx.font = "16px PT Mono";
+    ctx.font = '16px PT Mono';
     ctx.fill();
     ctx.closePath();
     ctx.stroke();
