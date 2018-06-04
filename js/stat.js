@@ -60,7 +60,7 @@ window.renderStatistics = function (ctx, names, times) {
 
     ctx.fillText(names[i], CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - CAPTION_BOTTOM);
     ctx.font = "10px PT Mono";
-    ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT);
+    ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_GAP + GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - DIAGRAM_BOTTOM - columnHeight - GAP / 2);
     ctx.font = "16px PT Mono";
     ctx.fill();
     ctx.closePath();
