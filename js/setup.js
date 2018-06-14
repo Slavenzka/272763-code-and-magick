@@ -126,23 +126,6 @@ inputName.addEventListener('blur', function (evt) {
   document.addEventListener('keydown', onPopupEscPress);
 });
 
-//Прочие сценарии для всплывающего окна
-
-var submitButton = setup.querySelector('.setup-submit');
-var popupForm = setup.querySelector('.setup-wizard-form');
-
-submitButton.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  popupForm.submit();
-});
-
-submitButton.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_CODE) {
-    evt.preventDefault();
-    popupForm.submit();
-  }
-});
-
 //Редактирование персонажа
 
 var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
