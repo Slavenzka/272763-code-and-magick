@@ -135,11 +135,11 @@ var wizardEyes = wizardSetup.querySelector('.wizard-eyes');
 var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
 var fillColor = function (colorsArray, targetElement) {
-  targetElement.style = "fill: " + colorsArray[getRandomElement(colorsArray)] + ';';
+  targetElement.style = 'fill: ' + colorsArray[getRandomElement(colorsArray)] + ';';
 };
 
 var changeBackground = function (colorsArray, targetElement) {
-  targetElement.style = "background-color: " + colorsArray[getRandomElement(colorsArray)] + ';';
+  targetElement.style = 'background-color: ' + colorsArray[getRandomElement(colorsArray)] + ';';
 };
 
 wizardCoat.addEventListener('click', function () {
