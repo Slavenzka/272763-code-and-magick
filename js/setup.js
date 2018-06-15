@@ -12,9 +12,13 @@ var wizardsNumber = 4;
 
 var wizardsList = [];
 
-var setupWindow = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
 
-var similarList = setupWindow.querySelector('.setup-similar-list');
+var setup = document.querySelector('.setup');
+
+var setupClose = setup.querySelector('.setup-close');
+
+var similarList = setup.querySelector('.setup-similar-list');
 
 var template = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -54,5 +58,107 @@ for (var i = 0; i < wizardsNumber; i++) {
 
 similarList.appendChild(fragment);
 
-setupWindow.classList.remove('hidden');
-setupWindow.querySelector('.setup-similar').classList.remove('hidden');
+setup.querySelector('.setup-similar').classList.remove('hidden');
+
+//  Механика кнопки открытия и закрытия .setup
+
+var ESC_CODE = 27;
+var ENTER_CODE = 13;
+
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_CODE) {
+    setup.classList.add('hidden');
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_CODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_CODE) {
+    closePopup();
+  }
+});
+
+setupClose.addEventListener('focus', function () {
+  setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_CODE) {
+      closePopup();
+    }
+  });
+});
+
+
+//  Работа с формой
+
+var inputName = setup.querySelector('.setup-user-name');
+
+inputName.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+inputName.addEventListener('blur', function () {
+  document.addEventListener('keydown', onPopupEscPress);
+});
+
+//  Редактирование персонажа
+
+var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var wizardSetup = setup.querySelector('.setup-wizard');
+var wizardCoat = wizardSetup.querySelector('.wizard-coat');
+var wizardEyes = wizardSetup.querySelector('.wizard-eyes');
+var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+var coatColorInput = setup.querySelector('input[name="coat-color"]');
+var eyesColorInput = setup.querySelector('input[name="eyes-color"]');
+var fireballColorInput = setup.querySelector('input[name="fireball-color"]');
+
+var fillColor = function (colorsArray, targetElement, targetInput) {
+  var color = colorsArray[getRandomElement(colorsArray)];
+
+  targetElement.style = 'fill: ' + color + ';';
+  targetInput.value = color.toString();
+};
+
+var changeBackground = function (colorsArray, targetElement, targetInput) {
+  var color = colorsArray[getRandomElement(colorsArray)];
+
+  targetElement.style = 'background-color: ' + color + ';';
+  targetInput.value = color.toString();
+};
+
+wizardCoat.addEventListener('click', function () {
+  fillColor(COAT_COLOR, wizardCoat, coatColorInput);
+});
+
+wizardEyes.addEventListener('click', function () {
+  fillColor(EYES_COLOR, wizardEyes, eyesColorInput);
+});
+
+wizardFireball.addEventListener('click', function () {
+  changeBackground(FIREBALL_COLOR, wizardFireball, fireballColorInput);
+});
