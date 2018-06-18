@@ -65,15 +65,29 @@ setup.querySelector('.setup-similar').classList.remove('hidden');
 var ESC_CODE = 27;
 var ENTER_CODE = 13;
 
+var getDefaultCoords = function (targetElement) {
+
+  window.defaultCoords = {
+    x: targetElement.offsetLeft,
+    y: targetElement.offsetTop
+  };
+};
+
+var renderPopupDefault = function (targetElement) {
+  targetElement.style.left = window.defaultCoords.x + 'px';
+  targetElement.style.top = window.defaultCoords.y + 'px';
+};
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_CODE) {
+    renderPopupDefault(setup);
     setup.classList.add('hidden');
   }
 };
 
 var openPopup = function () {
   setup.classList.remove('hidden');
+  getDefaultCoords(setup);
   document.addEventListener('keydown', onPopupEscPress);
 
 };
@@ -81,6 +95,7 @@ var openPopup = function () {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  renderPopupDefault(setup);
 };
 
 setupOpen.addEventListener('click', function () {
