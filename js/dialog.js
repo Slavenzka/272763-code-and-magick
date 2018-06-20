@@ -4,6 +4,13 @@
   var setupDialogElement = document.querySelector('.setup');
   var dialogHandler = setupDialogElement.querySelector('.upload');
 
+  var onClickPreventDefault = function (evt) {
+
+    evt.preventDefault();
+
+    dialogHandler.removeEventListener('click', onClickPreventDefault);
+  };
+
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
@@ -41,12 +48,6 @@
       document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
-        var onClickPreventDefault = function (evt) {
-
-          evt.preventDefault();
-
-          dialogHandler.removeEventListener('click', onClickPreventDefault);
-        };
 
         dialogHandler.addEventListener('click', onClickPreventDefault);
       }
