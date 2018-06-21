@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
 
   var setupDialogElement = document.querySelector('.setup');
@@ -56,4 +57,5 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-})();
+
+}());
