@@ -58,7 +58,6 @@
           onLoad(xhr.response);
         } else {
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-          window.backend.errorMessage('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }
       });
 
