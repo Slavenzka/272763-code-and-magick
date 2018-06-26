@@ -17,7 +17,8 @@
   form.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(form), function () {
       setup.classList.add('hidden');
-    }, function () {
+    }, function (errorText) {
+      window.backend.errorMessage(errorText);
     });
 
     evt.preventDefault();
